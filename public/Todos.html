@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Todo App</title>
+
   <style>
     * {
       margin: 0;
@@ -14,7 +15,7 @@
       background: linear-gradient(to right, #141e30, #243b55);
       color: #fff;
       min-height: 100vh;
-      padding-top: 80px; 
+      padding-top: 80px;
     }
 
     header {
@@ -23,133 +24,142 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
       position: fixed;
       top: 0;
-      left: 0;
       width: 100%;
-      z-index: 1000;
-    }
-
-    header h2 {
-      font-size: 24px;
-      color: #fff; 
-      padding: 8px 16px;
-      border-radius: 5px;
     }
 
     nav button {
-      margin-left: 12px;
-      background: white; 
-      color:black;
+      background: white;
+      color: black;
       border: none;
       padding: 10px 16px;
       border-radius: 5px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
-    }
-
-    nav button:hover {
-      background: #16a085;
-      color: #fff;
     }
 
     h2.page-title {
       text-align: center;
-      margin-bottom: 25px;
-      font-size: 28px;
-      color: white;
+      margin-bottom: 20px;
+    }
+
+    .todo-input {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .todo-input input {
+      padding: 10px;
+      width: 250px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .todo-input button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
     ul {
       list-style: none;
-      padding: 0;
       max-width: 500px;
       margin: auto;
     }
 
     li {
       background: rgba(0,0,0,0.7);
-      padding: 15px 20px;
-      margin-bottom: 12px;
+      padding: 15px;
+      margin-bottom: 10px;
       border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      color: #fff;
     }
 
-    .done {
-      color: #2ecc71;
-      font-weight: bold;
-    }
-
-    .pending {
-      color: #e74c3c;
-      font-weight: bold;
-    }
-
-    @media (max-width: 480px) {
-      header h2 {
-        font-size: 20px;
-        padding: 6px 12px;
-      }
-      nav button {
-        padding: 8px 12px;
-        font-size: 14px;
-      }
-      h2.page-title {
-        font-size: 24px;
-      }
-      li {
-        padding: 12px 15px;
-      }
+    .delete-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
-<body style="margin-top: 20px;">
 
-  <header>
-    <h2>Todo App</h2>
-    <nav>
-      <button onclick="logout()">Logout</button>
-    </nav>
-  </header>
+<body>
 
-  <h2 class="page-title">My Todo List</h2>
+<header>
+  <h2>Todo App</h2>
+  <nav>
+    <button onclick="logout()">Logout</button>
+  </nav>
+</header>
 
-  <ul id="todoList"></ul>
+<h2 class="page-title">My Todo List</h2>
 
-  <script>
-    const todos = [
-      { id: 1, task: "Learn HTML", completed: true },
-      { id: 2, task: "Practice CSS", completed: false },
-      { id: 3, task: "Learn JavaScript", completed: true },
-      { id: 4, task: "Build Mini Project", completed: false },
-      { id: 5, task: "Revise Concepts", completed: false }
-    ];
+<div class="todo-input">
+  <input type="text" id="d1" placeholder="Enter todo..." />
+  <button onclick="addTodo()">Add Todo</button>
+</div>
 
-    const todoList = document.getElementById("todoList");
+<ul id="todoList"></ul>
 
-    todos.forEach(todo => {
-      const li = document.createElement("li");
+<script>
+  let todos = [
+    "Learn HTML",
+    "Practice CSS",
+    "Understand JavaScript",
+    "Build Todo App"
+  ];
 
-      li.innerHTML = `
-        <span>${todo.task}</span>
-        <span class="${todo.completed ? 'done' : 'pending'}">
-          ${todo.completed ? 'Completed' : 'Pending'}
-        </span>
-      `;
+  showTodos();
 
-      todoList.appendChild(li);
-    });
+  function addTodo() {
+    let input = document.getElementById("d1");
+    let task = input.value.trim();
 
-    function logout() {
-      window.location.href = "/logout";
+    if (task === "") {
+      alert("Please enter a todo");
+      return;
     }
-  </script>
+
+    todos.push(task);
+    input.value = "";
+    showTodos();
+  }
+
+  function showTodos() {
+    let list = document.getElementById("todoList");
+    list.innerHTML = "";
+
+    todos.forEach((todo, index) => {
+      let li = document.createElement("li");
+      li.innerHTML = `
+        <span>${todo}</span>
+        <button class="delete-btn" onclick="deleteTodo(${index})">
+          Delete
+        </button>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  function deleteTodo(index) {
+    todos.splice(index, 1);
+    showTodos();
+  }
+
+  function logout() {
+    alert("Logout clicked");
+  }
+</script>
 
 </body>
 </html>
