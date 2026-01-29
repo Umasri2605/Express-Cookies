@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: #fff;
+      min-height: 100vh;
+      padding-top: 80px; 
+    }
+
+    header {
+      background-color: #111;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header h2 {
+      font-size: 24px;
+      color: #fff; 
+      padding: 8px 16px;
+      border-radius: 5px;
+    }
+
+    nav button {
+      margin-left: 12px;
+      background: white; 
+      color:black;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    nav button:hover {
+      background: #16a085;
+      color: #fff;
+    }
+
+    h2.page-title {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 28px;
+      color: white;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    li {
+      background: rgba(0,0,0,0.7);
+      padding: 15px 20px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      color: #fff;
+    }
+
+    .done {
+      color: #2ecc71;
+      font-weight: bold;
+    }
+
+    .pending {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+      header h2 {
+        font-size: 20px;
+        padding: 6px 12px;
+      }
+      nav button {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+      h2.page-title {
+        font-size: 24px;
+      }
+      li {
+        padding: 12px 15px;
+      }
+    }
+  </style>
+</head>
+<body style="margin-top: 20px;">
+
+  <header>
+    <h2>Todo App</h2>
+    <nav>
+      <button onclick="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <h2 class="page-title">My Todo List</h2>
+
+  <ul id="todoList"></ul>
+
+  <script>
+    const todos = [
+      { id: 1, task: "Learn HTML", completed: true },
+      { id: 2, task: "Practice CSS", completed: false },
+      { id: 3, task: "Learn JavaScript", completed: true },
+      { id: 4, task: "Build Mini Project", completed: false },
+      { id: 5, task: "Revise Concepts", completed: false }
+    ];
+
+    const todoList = document.getElementById("todoList");
+
+    todos.forEach(todo => {
+      const li = document.createElement("li");
+
+      li.innerHTML = `
+        <span>${todo.task}</span>
+        <span class="${todo.completed ? 'done' : 'pending'}">
+          ${todo.completed ? 'Completed' : 'Pending'}
+        </span>
+      `;
+
+      todoList.appendChild(li);
+    });
+
+    function logout() {
+      window.location.href = "/logout";
+    }
+  </script>
+
+</body>
+</html>

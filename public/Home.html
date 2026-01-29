@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #111;
+      color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    /* Todo App heading with white text */
+    header h2 {
+      font-size: 24px;
+      color: #fff;
+    }
+
+    /* Navbar buttons with white background and white text */
+    nav button {
+      margin-left: 12px;
+      background: #fff;
+      color: #111;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    nav button:hover {
+      background: #ddd;
+      color: #111;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 100px; 
+    }
+
+    .card {
+      background: rgba(0,0,0,0.7);
+      max-width: 500px;
+      margin: auto;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .card h3 {
+      color: #1abc9c;
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    .card p {
+      margin-bottom: 12px;
+      line-height: 1.6;
+      color: #ddd;
+      font-size: 16px;
+    }
+
+    @media (max-width: 480px) {
+      header h2 {
+        font-size: 20px;
+      }
+      nav button {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+      .card {
+        width: 90%;
+        padding: 25px;
+      }
+      .card h3 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>Todo App</h2>
+    <nav>
+      <button onclick="goTodos()">My Todos</button>
+      <button onclick="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h3>Welcome 👋</h3>
+      <p>You are logged in successfully.</p>
+      <p>
+        This is your <b>Home Page</b>.<br>
+        Click <b>My Todos</b> to manage your tasks.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function goTodos() {
+      window.location.href = "/Todos";
+    }
+
+    function logout() {
+      window.location.href = "/logout";
+    }
+  </script>
+
+</body>
+</html>
